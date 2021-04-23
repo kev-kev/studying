@@ -17,10 +17,12 @@
 # If out of order, would need to keep track of meeting start/end times as we progress, so I'm taking the first approach.
 
 def merge_ranges(meetings)
-  meetings = meetings.sort # [[0, 1], [3, 5], [4, 8], [10, 12], [9, 10]] --->  [[0, 1], [3, 5], [4, 8], [9, 10], [10, 12]]
-  results = [meetings[0]] # results = [[0, 1]]
-  meetings[1..-1].each_with_index do |meeting|  # [3, 5]
-    if meeting[0] <= results[-1][1] #
+  meetings = meetings.sort 
+  results = [meetings[0]] 
+  meetings[1..-1].each do |meeting|  
+    if meeting[1] < results[-1][1]
+      nil
+    elsif meeting[0] <= results[-1][1] 
       results[-1] = [results[-1][0], meeting[1]]
     else
       results << meeting
@@ -28,7 +30,3 @@ def merge_ranges(meetings)
   end
   results
 end
-
-sample = [[0, 1], [3, 5], [4, 8], [10, 12], [9, 10]]
-
-p merge_ranges(sample)
