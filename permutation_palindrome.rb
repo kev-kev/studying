@@ -23,22 +23,40 @@
 # iterate through the input string, adding to the hash as we come across new letters
 # then, check each value of the hash- if we have more than one odd, return false. otherwise, true
 
+# def permutation_palindrome?(string)
+#   count, i = {}, 0
+#   string.each_char do |c|
+#     if count[c]
+#       count[c] += 1 
+#     else
+#        count[c] = 1
+#     end
+#   end
+#   count.each_value do |n|
+#     if n.odd?
+#       i += 1
+#       return false if i > 1
+#     end
+#   end
+#   true
+# end
+
+# -- Improved answer --
+# We can tell if a char count is even by checking if it's included in a set
+# if the set has the char in it already, can delete it
+# then, we know if we have a valid palindrome if we have a 1-length set (1 odd num)
+
+require 'set'
 def permutation_palindrome?(string)
-  count, i = {}, 0
+  odd_chars = Set.new
   string.each_char do |c|
-    if count[c]
-      count[c] += 1 
+    if odd_chars.include?(c)
+      odd_chars.delete(c)
     else
-       count[c] = 1
+      odd_chars.add(c)
     end
   end
-  count.each_value do |n|
-    if n.odd?
-      i += 1
-      return false if i > 1
-    end
-  end
-  true
+  odd_chars.length <= 1
 end
 
-p permutation_palindrome?("ciivvvic")
+p permutation_palindrome?("civvvic")
