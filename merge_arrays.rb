@@ -7,7 +7,8 @@
 
 # -- Brainstorming --
 # Create indices for each array, and compare them 
-# if i > j, result << arr2[j] j ++
+# if i > j, result << arr2[j] j ++, etc...
+# then, just need to check for edge cases
 
 def merge_arrays(arr1, arr2)
   i, j = 0, 0

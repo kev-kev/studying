@@ -23,11 +23,6 @@ def reverse_words!(message)
   j = 0 # last space index
   message.each_char do |c| #'laets dnuop ekac'
     if c === " " 
-      if message[i + 1] === " " 
-          p message
-          i += 1
-          next
-      end
       reverse_string!(message, j, i-1)
       p message
       j = i + 1
