@@ -33,8 +33,10 @@
 # -- Edge cases --
 # what if the max profit isnt a positive number? ex: stock_prices = [5, 4, 2, 0] => max profit would be -1 (buying at 5, selling at 4)
 # could we then choose not to trade at all, defaulting to a max profit of 0? for this problem, ill assume at least one buy/sell is required
+# what if the input array length is less than 2?
 
 def get_max_profit(stock_prices)
+  raise ArgumentError, 'Must have at least two prices to calculate' if stock_prices.length < 2
   max_profit, min_price = nil, stock_prices[0]
   stock_prices[1..-1].each do |price|
     profit = price - min_price
@@ -44,5 +46,5 @@ def get_max_profit(stock_prices)
   max_profit
 end
 
-stock_prices = [5, 4, 2, 0]
+stock_prices = [5]
 p get_max_profit(stock_prices)
