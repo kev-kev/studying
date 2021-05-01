@@ -28,15 +28,22 @@
 #   end
 # end
 
+# def highest_product_of_3(input)
+#   input.sort!
+#   product1 = input[0] * input[1]
+#   product2 = input[-1] * input[-2]
+#   product1 > product2 ? 
+#     product1 * input[-1] :
+#     product2 * input[-3]
+# end
+
 def highest_product_of_3(input)
   input.sort!
-  product1 = input[0] * input[1]
-  product2 = input[-1] * input[-2]
-  product1 > product2 ? 
-    product1 * input[-1] :
-    product2 * input[-3]
+  product1 = input[0] * input[1] * input[-1]
+  product2 = input[-1] * input[-2] * input[-3]
+  [product1, product2].max
 end
 
-testcase = [1, 10, 5, 15, -20, -25]
+testcase = [-8,-7,-2,10,20] #1120
 
 p highest_product_of_3(testcase)
