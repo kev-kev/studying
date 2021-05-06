@@ -28,13 +28,37 @@
 # could iterate through the words, keeping track of the prev word
 # if our prev > cur, we're at the rotation point
 # else, set prev to the current word and move on
-def find_rotation_point(input)
-  prev = input.first
-  input[1..-1].each_with_index do |word, i|
-    return i+1 if prev > word
-    prev = word if prev < word
+
+# def find_rotation_point(input)
+#   prev = input.first
+#   input[1..-1].each_with_index do |word, i|
+#     return i+1 if prev > word
+#     prev = word if prev < word
+#   end
+#   0
+# end
+
+# should be able to do this in O(lg n) time though
+# since we're sorted and searching for an item in an array, we can use binary search
+# so we can guess the index that's half of the input length
+# if guess > first_word, we know the target is to the right, so move floor up
+# if guess < first_word, target is on the left, so move ceiling down
+
+def find_rotation_point(words)
+  raise ArgumentError, 'Input must contain more than one item.' if words.length <= 1
+  
+  floor = 0
+  ceiling = words.length - 1
+  first_word = words.first
+  while floor + 1 < ceiling
+    guess_index = (ceiling + floor) / 2
+    floor = guess_index if words[guess_index] > first_word
+    ceiling = guess_index if words[guess_index] < first_word
   end
+  raise ArgumentError, 'Input is sorted. No rotation point found.' if words[ceiling] === words.last # not rotated- already sorted
+  words[ceiling]
 end
+
 
   testcase = [
     'ptolemaic',
@@ -42,12 +66,8 @@ end
     'supplant',
     'undulate',
     'xenoepist',
-    'asymptote',  # <-- rotates here!
-    'babka',
-    'banoffee',
-    'engender',
-    'karpatka',
-    'othellolagkage',
 ]
+
+
 
 p find_rotation_point(testcase)
