@@ -28,9 +28,10 @@
 #   i'll assume not for this problem, so we could check for the chars we're interested in by checking if each char is included in a set of possible chars
 # are there any invalid inputs?
 #   if the length of our input is 1 or less
-# 
+
 require 'Set'
 def bracket_validator(input)
+  raise ArgumentError, 'Invalid input' if input.length >= 1
   chars = Set['{', '}', '[', ']', '(', ')']
   stack = []
   input.each_char do |c|
@@ -52,6 +53,6 @@ def bracket_validator(input)
   end
   true
 end
-# stack = ["}", ]
+
 testcase = "{ [ }" 
 p bracket_validator(testcase)
