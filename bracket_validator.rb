@@ -30,8 +30,10 @@
 #   if the length of our input is 1 or less
 
 require 'Set'
+
 def bracket_validator(input)
-  raise ArgumentError, 'Invalid input' if input.length >= 1
+  raise ArgumentError, 'Invalid input' if input.length <= 1
+
   chars = Set['{', '}', '[', ']', '(', ')']
   stack = []
   input.each_char do |c|

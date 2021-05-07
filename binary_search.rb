@@ -8,16 +8,16 @@
 # We've effectively divided the problem in half. We can "rule out" the whole half of the array that we know doesn't contain the target number.
 # Repeat the same approach (of starting in the middle) on the new half-size problem. Then do it again and again, until we either find the number or "rule out" the whole set.
 
-def binary_search(x, input)
+def binary_search(target, input)
   floor = -1
   ceiling = input.length
 
   while floor + 1 < ceiling # if we don't have at least one index left, don't run
     # find halfway point between the floor and ceiling, add it to the floor for our guess
     n = (ceiling - floor) / 2 + floor
-    if input[n] == x # match
+    if input[n] == target # match
       return true
-    elsif n > x # guess is greater than our target so move ceiling down
+    elsif n > target # guess is greater than our target so move ceiling down
       ceiling = n
     else # guess is less than target, so move floor up
       floor = n
@@ -26,6 +26,6 @@ def binary_search(x, input)
   false
 end
 
-test_x = 11
+test_target = 11
 test_input = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-p binary_search(test_x, test_input)
+p binary_search(test_target, test_input)
