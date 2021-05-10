@@ -15,22 +15,45 @@
 # Columns are the target amount
 # Rows are the coins we have available to make a target amount
 
-#        0 | 1 | 2 | 3 | 4 | 5
-#   125| 1   1   2   2   3   4
+# table[1][2] is asking how many ways are there to make 2 with 1
+# table[3][5] asks how many ways are there to make 5 with 1, 2, 5 (our answer)
 
-def change(amount, coins)
-  combinations = Array.new(amount + 1, 0)
-  combinations[0] = 1 # we know there is always one way to make 0 - with no coins
-  coins.each do |coin|
-    combinations.each_index do |target| 
-      next if target == 0
-      if target >= coin 
-        combinations[target] += combinations[target - coin]
+# -- 2d array bottom up approach -- 
+
+def change(n, coins)
+  size = coins.length
+  table = []
+  (size + 1).times do
+    table << [1] + Array.new(n, 0)
+  end
+  (1..size).each do |row|
+    (1..n).each do |col|
+      if coins[row-1] <= col
+        table[row][col] = table[row - 1][col] + table[row][col - coins[row - 1]]
+      else # we can't use the coin, so take the val from one row up
+        table[row][col] = table[row-1][col]
       end
     end
   end
-  p combinations
-  combinations.last
+  table.each do |row|
+    p row
+  end
 end
 
-p change(5, [1, 2, 5])
+# -- 1D array bottom up approach --
+
+# def change(amount, coins)
+#   combinations = Array.new(amount + 1, 0)
+#   combinations[0] = 1 # we know there is always one way to make 0 - with no coins
+#   coins.each do |coin|
+#     (0..amount).each do |target| 
+#       next if target == 0
+#       if target >= coin 
+#         combinations[target] += combinations[target - coin]
+#       end
+#     end
+#   end
+#   combinations.last
+# end 
+
+change(5, [1, 6])
