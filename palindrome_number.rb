@@ -1,9 +1,11 @@
 # @param {Integer} x
 # @return {Boolean}
 
-
 def is_palindrome(x) 
+  # one line solution
+  # x == x.to_s.reverse.to_i ? true : false
   orig = x
+
   return true if x < 10 && x >= 0
   return false if x < 0 || (x % 10 == 0)
   reverse = 0
