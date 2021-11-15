@@ -14,7 +14,7 @@ def shuffle!(input)
     raise ArgumentError, "Array must contain at least two items to be shuffled"
   end
   last = input.length - 1 # last index
-  (0..last - 1).each do |cur|
+  (0..last - 1).each do |cur| 
     random = rand(cur..last)
     # if the random index picked isn't the same as the current index, swap them
     unless random === cur

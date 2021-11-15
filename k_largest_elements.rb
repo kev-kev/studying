@@ -9,6 +9,7 @@
 # is 23.
 
 # -- Brainstorming --
+# could just sort and return the last k elements
 # crate an output arr with length k of the first k elements of the array and get the smallest item
 # then from k..n-1, we check arr[i] at each step
 # if larger than the smallest item, we replace it with arr[i] and determine the min again
